@@ -98,12 +98,34 @@
         .language-switch a:hover {
             background: #7c3aed;
         }
+        .repo-button {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .repo-button a {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .repo-button a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(59, 130, 246, 0.4);
+        }
     </style>
 </head>
 <body>
     <h1>🎮 Script Complete Discord Quest</h1>
     <div class="language-switch">
         <a href="index.html">English</a> | <a href="index-es.html">Español</a>
+    </div>
+    <div class="repo-button">
+        <a href="https://github.com/CiszukoAntony/CompleteDiscordQuest" target="_blank">Ver en GitHub</a>
     </div>
     <p><img src="https://img.shields.io/badge/Licencia-MIT-blue.svg" alt="Licencia: MIT"> <img src="https://img.shields.io/badge/Funciona%20desde-Enero%202026-blue.svg" alt="Funciona desde Enero 2026"></p>
     <p>¡Completa automáticamente las quests de Discord con facilidad! 🚀 Hecho por CiszukoAntony.</p>
@@ -446,7 +468,28 @@ if(quests.length === 0) {
 
     <div class="section" id="licencia">
         <h2>📄 Licencia</h2>
-        <p>Este proyecto está licenciado bajo la Licencia MIT - consulta el archivo <a href="LICENSE">LICENSE</a> para más detalles.</p>
+        <p>Este proyecto está licenciado bajo la Licencia MIT. A continuación el texto completo de la licencia:</p>
+        <pre><code>Licencia MIT
+
+Copyright (c) 2024 CiszukoAntony
+
+Se concede permiso, libre de cargos, a cualquier persona que obtenga una copia
+de este software y de los archivos de documentación asociados (el "Software"), a utilizar
+el Software sin restricción, incluyendo sin limitación los derechos
+a usar, copiar, modificar, fusionar, publicar, distribuir, sublicenciar, y/o vender
+copias del Software, y a permitir a las personas a las que se les proporcione el Software
+a hacer lo mismo, sujeto a las siguientes condiciones:
+
+El aviso de copyright anterior y este aviso de permiso se incluirán en todas
+las copias o partes sustanciales del Software.
+
+EL SOFTWARE SE PROPORCIONA "COMO ESTÁ", SIN GARANTÍA DE NINGÚN TIPO, EXPRESA O
+IMPLÍCITA, INCLUYENDO PERO NO LIMITADO A GARANTÍAS DE COMERCIALIZACIÓN,
+IDONEIDAD PARA UN PROPÓSITO PARTICULAR E INCUMPLIMIENTO. EN NINGÚN CASO LOS
+AUTORES O PROPIETARIOS DE LOS DERECHOS DE AUTOR SERÁN RESPONSABLES DE NINGUNA
+RECLAMACIÓN, DAÑOS U OTRAS RESPONSABILIDADES, YA SEA EN UNA ACCIÓN DE CONTRATO,
+DELITO O DE OTRA MANERA, DERIVADAS DE, FUERA DE O EN CONEXIÓN CON EL SOFTWARE
+O EL USO U OTRO TIPO DE ACCIONES EN EL SOFTWARE.</code></pre>
     </div>
 
     <hr>
