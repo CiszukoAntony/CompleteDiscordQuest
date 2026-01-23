@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Discord Quest Script</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        h1, h2, h3 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 4px; border-radius: 4px; }
+        pre { background: #f4f4f4; padding: 10px; border-radius: 4px; overflow-x: auto; }
+        .section { margin-bottom: 40px; }
+    </style>
+</head>
+<body>
+    <h1>🎮 Complete Discord Quest Script</h1>
+    <p><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"> <img src="https://img.shields.io/badge/Works%20as%20of-January%202026-blue.svg" alt="Works as of January 2026"></p>
+    <p>Automatically complete Discord quests with ease! 🚀 Made by CiszukoAntony.</p>
+
+    <div class="section">
+        <h2>📋 Table of Contents</h2>
+        <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#prerequisites">Prerequisites</a></li>
+            <li><a href="#installation">Installation & Usage</a></li>
+            <li><a href="#script">Script</a></li>
+            <li><a href="#commands">Commands</a></li>
+            <li><a href="#progress">Progress Tracking</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#license">License</a></li>
+        </ul>
+    </div>
+
+    <div class="section" id="features">
+        <h2>✨ Features</h2>
+        <ul>
+            <li>🔄 <strong>Automatic Quest Completion</strong>: Spoofs video watching, game playing, streaming, and activity tasks.</li>
+            <li>🛑 <strong>Stop/Resume Functionality</strong>: Control the script anytime with simple console commands.</li>
+            <li>🌐 <strong>Multi-Language Support</strong>: Available in English and Spanish.</li>
+            <li>🖥️ <strong>Desktop App Required</strong>: Optimized for Discord's desktop application.</li>
+            <li>⚡ <strong>Real-time Progress</strong>: Monitor quest progress directly in the console.</li>
+            <li>🔒 <strong>Safe & Open Source</strong>: MIT licensed, no malicious code.</li>
+        </ul>
+    </div>
+
+    <div class="section" id="prerequisites">
+        <h2>📋 Prerequisites</h2>
+        <ul>
+            <li><strong>Discord Desktop App</strong>: This script only works on the desktop application, not in browsers.</li>
+            <li><strong>Developer Mode Enabled</strong>: Required to access developer tools.</li>
+            <li><strong>Active Quests</strong>: You need enrolled, uncompleted quests in Discord.</li>
+        </ul>
+    </div>
+
+    <div class="section" id="installation">
+        <h2>🚀 Installation & Usage</h2>
+        <h3>Step-by-Step Guide</h3>
+        <ol>
+            <li><strong>Open Discord Desktop App</strong> 🖥️<br>Ensure you're using the official Discord desktop client (not web or mobile).</li>
+            <li><strong>Enable Developer Mode</strong> ⚙️<br>Go to <code>User Settings > Advanced > Developer Mode</code> and toggle it on.<br>If that doesn't work, edit your settings file:<br>- <strong>Windows</strong>: <code>%AppData%\discord\settings.json</code><br>- <strong>Linux</strong>: <code>~/.config/discord/settings.json</code><br>- <strong>macOS</strong>: <code>~/Library/Application Support/discord/settings.json</code><br>Add this line: <code>"DANGEROUS_ENABLE_DEVTOOLS_ONLY_ENABLE_IF_YOU_KNOW_WHAT_YOURE_DOING": true</code><br>Save and restart Discord.</li>
+            <li><strong>Open Developer Tools</strong> 🛠️<br>Join any server and press <code>Ctrl + Shift + I</code> (or <code>Cmd + Option + I</code> on Mac) to open DevTools.<br>If the shortcut doesn't work, right-click anywhere and select "Inspect Element".</li>
+            <li><strong>Enable Pasting in Console</strong> ⚠️<br>Go to the "Console" tab.<br>Type <code>"allow pasting"</code> and press Enter. This allows pasting long scripts.</li>
+            <li><strong>Copy & Paste the Script</strong> 📋<br>Copy the entire script from the <a href="#script">Script</a> section below.<br>Paste it into the console and press Enter.</li>
+            <li><strong>Monitor Progress</strong> 👀<br>Watch the console for progress updates.<br>The script will automatically complete your quests.</li>
+            <li><strong>Enjoy Your Rewards</strong> 🎉<br>Once completed, claim your quest rewards manually.</li>
+        </ol>
+        <h3>Important Notes</h3>
+        <ul>
+            <li><strong>Voice Channel Requirements</strong>: Some quests require you to be in a voice channel with at least one other person.</li>
+            <li><strong>Quest Types Supported</strong>:
+                <ul>
+                    <li>🎥 Video watching</li>
+                    <li>🕹️ Game playing</li>
+                    <li>📺 Streaming</li>
+                    <li>🎮 Activity participation</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section" id="script">
+        <h2>📜 Script</h2>
+        <p>Copy and paste this entire script into the Discord console:</p>
+        <pre><code>// Complete Discord Quest Script.
+// Works as of January 2026.
+// Made by CiszukoAntony.
+
+// Instructions:
+// 1. Open Discord on desktop app.
+// 2. Go to User Settings > Advanced > Developer Mode and enable it.
+// 3. Open any server and press Ctrl + Shift + I to open the developer tools.
+// 4. WARNING: Go to the "Console" tab, type "allow pasting" in the text box, and press Enter. This is to allow pasting long scripts.
+// 5. Copy and paste the complete script below into the console and press Enter.
+// 6. Wait for the script to automatically complete your quests.
+// 7. If you want to stop the script at any time, type "window.stopQuestScript = true" in the console and press Enter.
+// 8. If you want to resume the script, type "window.stopQuestScript = false" and press Enter.
+// 9. Enjoy your Quest rewards!
+
+// Note: Some quests require you to be in a voice channel with at least one other person to count the time. Make sure to meet those requirements to complete those quests.
+
+delete window.$;
+window.stopQuestScript = false; // Global variable to stop the script
+let wpRequire = webpackChunkdiscord_app.push([[Symbol()], {}, r => r]);
+webpackChunkdiscord_app.pop();
+
+let ApplicationStreamingStore = Object.values(wpRequire.c).find(x => x?.exports?.Z?.__proto__?.getStreamerActiveStreamMetadata)?.exports?.Z;
+let RunningGameStore, QuestsStore, ChannelStore, GuildChannelStore, FluxDispatcher, api
+if(!ApplicationStreamingStore) {
+    ApplicationStreamingStore = Object.values(wpRequire.c).find(x => x?.exports?.A?.__proto__?.getStreamerActiveStreamMetadata).exports.A;
+    RunningGameStore = Object.values(wpRequire.c).find(x => x?.exports?.Ay?.getRunningGames).exports.Ay;
+    QuestsStore = Object.values(wpRequire.c).find(x => x?.exports?.A?.__proto__?.getQuest).exports.A;
+    ChannelStore = Object.values(wpRequire.c).find(x => x?.exports?.A?.__proto__?.getAllThreadsForParent).exports.A;
+    GuildChannelStore = Object.values(wpRequire.c).find(x => x?.exports?.Ay?.getSFWDefaultChannel).exports.Ay;
+    FluxDispatcher = Object.values(wpRequire.c).find(x => x?.exports?.h?.__proto__?.flushWaitQueue).exports.h;
+    api = Object.values(wpRequire.c).find(x => x?.exports?.Bo?.get).exports.Bo;
+} else {
+    RunningGameStore = Object.values(wpRequire.c).find(x => x?.exports?.ZP?.getRunningGames).exports.ZP;
+    QuestsStore = Object.values(wpRequire.c).find(x => x?.exports?.Z?.__proto__?.getQuest).exports.Z;
+    ChannelStore = Object.values(wpRequire.c).find(x => x?.exports?.Z?.__proto__?.getAllThreadsForParent).exports.Z;
+    GuildChannelStore = Object.values(wpRequire.c).find(x => x?.exports?.ZP?.getSFWDefaultChannel).exports.ZP;
+    FluxDispatcher = Object.values(wpRequire.c).find(x => x?.exports?.Z?.__proto__?.flushWaitQueue).exports.Z;
+    api = Object.values(wpRequire.c).find(x => x?.exports?.tn?.get).exports.tn;    
+}
+
+const supportedTasks = ["WATCH_VIDEO", "PLAY_ON_DESKTOP", "STREAM_ON_DESKTOP", "PLAY_ACTIVITY", "WATCH_VIDEO_ON_MOBILE"]
+let quests = [...QuestsStore.quests.values()].filter(x => x.userStatus?.enrolledAt && !x.userStatus?.completedAt && new Date(x.config.expiresAt).getTime() > Date.now() && supportedTasks.find(y => Object.keys((x.config.taskConfig ?? x.config.taskConfigV2).tasks).includes(y)))
+let isApp = typeof DiscordNative !== "undefined"
+if(quests.length === 0) {
+    console.log("You don't have any uncompleted quests!")
+} else {
+    let doJob = function() {
+        if(window.stopQuestScript) {
+            console.log("Script stopped by user.");
+            return;
+        }
+        const quest = quests.pop()
+        if(!quest) return
+
+        const pid = Math.floor(Math.random() * 30000) + 1000
+        
+        const applicationId = quest.config.application.id
+        const applicationName = quest.config.application.name
+        const questName = quest.config.messages.questName
+        const taskConfig = quest.config.taskConfig ?? quest.config.taskConfigV2
+        const taskName = supportedTasks.find(x => taskConfig.tasks[x] != null)
+        const secondsNeeded = taskConfig.tasks[taskName].target
+        let secondsDone = quest.userStatus?.progress?.[taskName]?.value ?? 0
+
+        if(taskName === "WATCH_VIDEO" || taskName === "WATCH_VIDEO_ON_MOBILE") {
+            const maxFuture = 10, speed = 7, interval = 1
+            const enrolledAt = new Date(quest.userStatus.enrolledAt).getTime()
+            let completed = false
+            let fn = async () => {            
+                while(true) {
+                    if(window.stopQuestScript) {
+                        console.log("Script stopped during video quest.");
+                        return;
+                    }
+                    const maxAllowed = Math.floor((Date.now() - enrolledAt)/1000) + maxFuture
+                    const diff = maxAllowed - secondsDone
+                    const timestamp = secondsDone + speed
+                    if(diff >= speed) {
+                        const res = await api.post({url: `/quests/${quest.id}/video-progress`, body: {timestamp: Math.min(secondsNeeded, timestamp + Math.random())}})
+                        completed = res.body.completed_at != null
+                        secondsDone = Math.min(secondsNeeded, timestamp)
+                    }
+                    
+                    if(timestamp >= secondsNeeded) {
+                        break
+                    }
+                    await new Promise(resolve => setTimeout(resolve, interval * 1000))
+                }
+                if(!completed) {
+                    await api.post({url: `/quests/${quest.id}/video-progress`, body: {timestamp: secondsNeeded}})
+                }
+                console.log("Quest completed!")
+                doJob()
+            }
+            fn()
+            console.log(`Spoofing video for ${questName}.`)
+        } else if(taskName === "PLAY_ON_DESKTOP") {
+            if(!isApp) {
+                console.log("This no longer works in the browser for non-video quests. Use the Discord desktop app to complete the", questName, "quest!")
+            } else {
+                api.get({url: `/applications/public?application_ids=${applicationId}`}).then(res => {
+                    const appData = res.body[0]
+                    const exeName = appData.executables.find(x => x.os === "win32").name.replace(">","")
+                    
+                    const fakeGame = {
+                        cmdLine: `C:\\Program Files\\${appData.name}\\${exeName}`,
+                        exeName,
+                        exePath: `c:/program files/${appData.name.toLowerCase()}/${exeName}`,
+                        hidden: false,
+                        isLauncher: false,
+                        id: applicationId,
+                        name: appData.name,
+                        pid: pid,
+                        pidPath: [pid],
+                        processName: appData.name,
+                        start: Date.now(),
+                    }
+                    const realGames = RunningGameStore.getRunningGames()
+                    const fakeGames = [fakeGame]
+                    const realGetRunningGames = RunningGameStore.getRunningGames
+                    const realGetGameForPID = RunningGameStore.getGameForPID
+                    RunningGameStore.getRunningGames = () => fakeGames
+                    RunningGameStore.getGameForPID = (pid) => fakeGames.find(x => x.pid === pid)
+                    FluxDispatcher.dispatch({type: "RUNNING_GAMES_CHANGE", removed: realGames, added: [fakeGame], games: fakeGames})
+                    
+                    let fn = data => {
+                        let progress = quest.config.configVersion === 1 ? data.userStatus.streamProgressSeconds : Math.floor(data.userStatus.progress.PLAY_ON_DESKTOP.value)
+                        console.log(`Quest progress: ${progress}/${secondsNeeded}`)
+                        
+                        if(progress >= secondsNeeded) {
+                            console.log("Quest completed!")
+                            
+                            RunningGameStore.getRunningGames = realGetRunningGames
+                            RunningGameStore.getGameForPID = realGetGameForPID
+                            FluxDispatcher.dispatch({type: "RUNNING_GAMES_CHANGE", removed: [fakeGame], added: [], games: []})
+                            FluxDispatcher.unsubscribe("QUESTS_SEND_HEARTBEAT_SUCCESS", fn)
+                            
+                            doJob()
+                        }
+                    }
+                    FluxDispatcher.subscribe("QUESTS_SEND_HEARTBEAT_SUCCESS", fn)
+                    
+                    console.log(`Spoofed your game to ${applicationName}. Wait ${Math.ceil((secondsNeeded - secondsDone) / 60)} more minutes.`)
+                })
+            }
+        } else if(taskName === "STREAM_ON_DESKTOP") {
+            if(!isApp) {
+                console.log("This no longer works in the browser for non-video quests. Use the Discord desktop app to complete the", questName, "quest!")
+            } else {
+                let realFunc = ApplicationStreamingStore.getStreamerActiveStreamMetadata
+                ApplicationStreamingStore.getStreamerActiveStreamMetadata = () => ({
+                    id: applicationId,
+                    pid,
+                    sourceName: null
+                })
+                
+                let fn = data => {
+                    let progress = quest.config.configVersion === 1 ? data.userStatus.streamProgressSeconds : Math.floor(data.userStatus.progress.STREAM_ON_DESKTOP.value)
+                    console.log(`Quest progress: ${progress}/${secondsNeeded}`)
+                    
+                    if(progress >= secondsNeeded) {
+                        console.log("Quest completed!")
+                        
+                        ApplicationStreamingStore.getStreamerActiveStreamMetadata = realFunc
+                        FluxDispatcher.unsubscribe("QUESTS_SEND_HEARTBEAT_SUCCESS", fn)
+                        
+                        doJob()
+                    }
+                }
+                FluxDispatcher.subscribe("QUESTS_SEND_HEARTBEAT_SUCCESS", fn)
+                
+                console.log(`Spoofed your stream to ${applicationName}. Stream any window in vc for ${Math.ceil((secondsNeeded - secondsDone) / 60)} more minutes.`)
+                console.log("Remember that you need at least 1 more person to be in the vc!")
+            }
+        } else if(taskName === "PLAY_ACTIVITY") {
+            const channelId = ChannelStore.getSortedPrivateChannels()[0]?.id ?? Object.values(GuildChannelStore.getAllGuilds()).find(x => x != null && x.VOCAL.length > 0).VOCAL[0].channel.id
+            const streamKey = `call:${channelId}:1`
+            
+            let fn = async () => {
+                console.log("Completing quest", questName, "-", quest.config.messages.questName)
+                
+                while(true) {
+                    if(window.stopQuestScript) {
+                        console.log("Script stopped during activity quest.");
+                        return;
+                    }
+                    const res = await api.post({url: `/quests/${quest.id}/heartbeat`, body: {stream_key: streamKey, terminal: false}})
+                    const progress = res.body.progress.PLAY_ACTIVITY.value
+                    console.log(`Quest progress: ${progress}/${secondsNeeded}`)
+                    
+                    await new Promise(resolve => setTimeout(resolve, 20 * 1000))
+                    
+                    if(progress >= secondsNeeded) {
+                        await api.post({url: `/quests/${quest.id}/heartbeat`, body: {stream_key: streamKey, terminal: true}})
+                        break
+                    }
+                }
+                
+                console.log("Quest completed! - Thanks for using my script - CiszukoAntony")
+                doJob()
+            }
+            fn()
+        }
+    }
+    doJob()
+}</code></pre>
+    </div>
+
+    <div class="section" id="commands">
+        <h2>🎮 Commands</h2>
+        <ul>
+            <li><strong>Stop Script</strong>: <code>window.stopQuestScript = true</code></li>
+            <li><strong>Resume Script</strong>: <code>window.stopQuestScript = false</code></li>
+        </ul>
+    </div>
+
+    <div class="section" id="progress">
+        <h2>📊 Progress Tracking</h2>
+        <p>Monitor your quest progress by checking the console logs:</p>
+        <ul>
+            <li><code>Quest progress: X/Y</code> - Shows current progress for play/stream quests.</li>
+            <li><code>Spoofing video for [Quest Name]</code> - Indicates video quest is running.</li>
+            <li><code>Quest completed!</code> - Quest finished successfully.</li>
+        </ul>
+        <p>For video quests, you can also check the progress bar in Discord's Quests tab.</p>
+    </div>
+
+    <div class="section" id="faq">
+        <h2>❓ FAQ</h2>
+        <details>
+            <summary><strong>Q: Can I get banned for using this?</strong></summary>
+            <p>A: There is always a risk, although so far no one has been banned for this or other similar things like client mods.</p>
+        </details>
+        <details>
+            <summary><strong>Q: Ctrl + Shift + I doesn't work</strong></summary>
+            <p>A: Download the <a href="https://discord.com/api/downloads/distributions/app/installers/latest?channel=ptb&platform=win&arch=x64">PTB client</a>, or use <a href="https://www.reddit.com/r/discordapp/comments/sc61n3/comment/hu4fw5x/">this</a> to enable DevTools in stable.</p>
+        </details>
+        <details>
+            <summary><strong>Q: Ctrl + Shift + I takes a screenshot</strong></summary>
+            <p>A: Disable the keyboard shortcut in your AMD Radeon app.</p>
+        </details>
+        <details>
+            <summary><strong>Q: I get a syntax error/unexpected token error</strong></summary>
+            <p>A: Make sure your browser isn't automatically translating this website before copying the script. Disable any translator extensions and try again.</p>
+        </details>
+        <details>
+            <summary><strong>Q: I'm on Vesktop but it tells me I'm using a browser</strong></summary>
+            <p>A: Vesktop is not a real desktop client, it's an elegant browser wrapper. Download the real desktop app instead.</p>
+        </details>
+        <details>
+            <summary><strong>Q: I get a different error</strong></summary>
+            <p>A: Make sure to copy/paste the script correctly and that you've done all the steps.</p>
+        </details>
+        <details>
+            <summary><strong>Q: Can I complete expired quests with this?</strong></summary>
+            <p>A: No, there is no way to do that.</p>
+        </details>
+        <details>
+            <summary><strong>Q: Can you make the script automatically accept the quest/reward?</strong></summary>
+            <p>A: No. Both actions may show a captcha, so automating them is not a good idea. Just do the two clicks yourself.</p>
+        </details>
+        <details>
+            <summary><strong>Q: Can you make this a Vencord plugin?</strong></summary>
+            <p>A: No. The script sometimes requires immediate updates for Discord changes, and Vencord's update and code review cycle would be too slow for that. There are some Vencord forks that have implemented this script or their own quest completers if you really want one.</p>
+        </details>
+        <details>
+            <summary><strong>Q: Can you upload the independent script to a repo and make this gist's code be a one-line fetch()?</strong></summary>
+            <p>A: No. Doing that would put you at risk because I (or someone in my account) could change the underlying code to be malicious at any time, then forcepush it away later, and you'd never know.</p>
+        </details>
+    </div>
+
+    <div class="section" id="license">
+        <h2>📄 License</h2>
+        <p>This project is licensed under the MIT License - see the <a href="LICENSE">LICENSE</a> file for details.</p>
+    </div>
+
+    <hr>
+    <p><strong>Disclaimer</strong>: Use at your own risk. This script is for educational purposes only.</p>
+
+    <hr>
+    <h1>🎮 Versión en Español - Script Complete Discord Quest</h1>
+    <!-- Aquí puedes agregar el contenido en español similar, pero para brevedad, solo indico que está disponible en el README completo -->
+    <p>La versión en español está disponible en el <a href="README.md">README.md</a> completo en GitHub.</p>
+</body>
+</html>
