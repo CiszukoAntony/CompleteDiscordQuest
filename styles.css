@@ -160,25 +160,51 @@ p img {
     flex-wrap: wrap;
 }
 .stat {
-    background: rgba(59, 130, 246, 0.1);
-    padding: 15px;
-    border-radius: 8px;
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    padding: 20px;
+    border-radius: 12px;
     text-align: center;
-    border: 1px solid #3b82f6;
-    transition: background 0.3s;
+    border: 2px solid #60a5fa;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+    min-width: 120px;
+    position: relative;
+    overflow: hidden;
+}
+.stat::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: rotate(45deg);
+    transition: transform 0.6s;
+}
+.stat:hover::before {
+    transform: rotate(45deg) translate(50%, 50%);
 }
 .stat:hover {
-    background: rgba(59, 130, 246, 0.2);
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.6);
 }
 .stat h3 {
-    margin: 0;
-    font-size: 1.5em;
-    color: #60a5fa;
+    margin: 10px 0 5px 0;
+    font-size: 2em;
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 .stat p {
-    margin: 5px 0 0 0;
+    margin: 0;
     color: #e0e7ff;
+    font-weight: bold;
+    font-size: 1.1em;
 }
+.stat:nth-child(1)::after { content: '⭐'; position: absolute; top: 10px; right: 10px; font-size: 1.5em; }
+.stat:nth-child(2)::after { content: '🍴'; position: absolute; top: 10px; right: 10px; font-size: 1.5em; }
+.stat:nth-child(3)::after { content: '🐛'; position: absolute; top: 10px; right: 10px; font-size: 1.5em; }
+.stat:nth-child(4)::after { content: '👀'; position: absolute; top: 10px; right: 10px; font-size: 1.5em; }
 @media (max-width: 768px) {
     body {
         padding: 10px;
