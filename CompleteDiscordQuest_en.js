@@ -1,6 +1,7 @@
 // Complete Discord Quest Script.
 // Works as of January 2026.
 // Made by CiszukoAntony.
+// Gist Updated
 
 // Instructions:
 // 1. Open Discord on desktop app.

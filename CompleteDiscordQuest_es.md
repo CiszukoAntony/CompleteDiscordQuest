@@ -1,6 +1,6 @@
 # Script Complete Discord Quest en Español
 
-## Funciona desde enero del 2026
+## Funciona desde enero del 2026 - Gist Updated
 
 > Hecho por CiszukoAntony.
 

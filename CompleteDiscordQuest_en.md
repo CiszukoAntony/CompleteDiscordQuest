@@ -1,6 +1,6 @@
 # Complete Discord Quest Script
 
-## Works as of January 2026
+## Works as of January 2026 - Gist Updated
 
 > Made by CiszukoAntony.
 

@@ -1,6 +1,7 @@
 // Script Complete Discord Quest en Español.
 // Funciona desde enero de 2026.
 // Hecho por CiszukoAntony.
+// Gist Updated
 
 // Instrucciones:
 // 1. Abre Discord en aplicacion de escritorio.
