@@ -155,3 +155,7 @@ SOFTWARE.
 </details>
 
 ___
+
+# ⚠️ Advertencia
+
+> Discord actualiza frecuentemente su estructura interna. El script ahora intenta adaptarse automáticamente, pero puede fallar si Discord cambia demasiado. Si ocurre, revisa los logs de consola y espera una actualización.

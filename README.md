@@ -417,12 +417,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
    - Una vez completado, reclama tus recompensas de quest manualmente.
 
 ### Notas Importantes
-- **Requisitos de Canal de Voz**: Algunas quests requieren que estés en un canal de voz con al menos una persona más.
-- **Tipos de Quest Soportados**:
-  - 🎥 Visualización de videos
-  - 🕹️ Juego
-  - 📺 Streaming
-  - 🎮 Participación en actividad
+- **Requisitos de Canal de Voz**: Algunas quests requieren que estés en un canal de voz con al menos otra persona para contar el tiempo. Asegúrate de cumplir con esos requisitos para completar esas quests.
 
 ## 📜 Script
 

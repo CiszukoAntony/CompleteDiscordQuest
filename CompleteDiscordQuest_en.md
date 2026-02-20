@@ -148,3 +148,7 @@ SOFTWARE.
 </details>
 
 ___
+
+# ⚠️ Warning
+
+> Discord frequently updates its internal structure. The script now tries to adapt automatically, but may fail if Discord changes too much. If this happens, check the console logs and wait for an update.
