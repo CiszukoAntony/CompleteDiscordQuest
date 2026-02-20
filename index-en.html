@@ -99,7 +99,9 @@
 
     <div class="section" id="script">
         <h2>📜 Script</h2>
-        <p>Copy and paste this entire script into the Discord console:</p>
+        <p>The updated script now supports quests that do not provide an executable (e.g., Toxic Commando). It will spoof the game using only the app name and ID if needed.</p>
+        <details>
+        <summary>Click to expand script</summary>
         <pre><code>// Complete Discord Quest Script.
 // Works as of January 2026.
 // Made by CiszukoAntony.
@@ -122,27 +124,43 @@ window.stopQuestScript = false; // Global variable to stop the script
 let wpRequire = webpackChunkdiscord_app.push([[Symbol()], {}, r => r]);
 webpackChunkdiscord_app.pop();
 
-let ApplicationStreamingStore = Object.values(wpRequire.c).find(x => x?.exports?.Z?.__proto__?.getStreamerActiveStreamMetadata)?.exports?.Z;
-let RunningGameStore, QuestsStore, ChannelStore, GuildChannelStore, FluxDispatcher, api
-if(!ApplicationStreamingStore) {
-    ApplicationStreamingStore = Object.values(wpRequire.c).find(x => x?.exports?.A?.__proto__?.getStreamerActiveStreamMetadata).exports.A;
-    RunningGameStore = Object.values(wpRequire.c).find(x => x?.exports?.Ay?.getRunningGames).exports.Ay;
-    QuestsStore = Object.values(wpRequire.c).find(x => x?.exports?.A?.__proto__?.getQuest).exports.A;
-    ChannelStore = Object.values(wpRequire.c).find(x => x?.exports?.A?.__proto__?.getAllThreadsForParent).exports.A;
-    GuildChannelStore = Object.values(wpRequire.c).find(x => x?.exports?.Ay?.getSFWDefaultChannel).exports.Ay;
-    FluxDispatcher = Object.values(wpRequire.c).find(x => x?.exports?.h?.__proto__?.flushWaitQueue).exports.h;
-    api = Object.values(wpRequire.c).find(x => x?.exports?.Bo?.get).exports.Bo;
-} else {
-    RunningGameStore = Object.values(wpRequire.c).find(x => x?.exports?.ZP?.getRunningGames).exports.ZP;
-    QuestsStore = Object.values(wpRequire.c).find(x => x?.exports?.Z?.__proto__?.getQuest).exports.Z;
-    ChannelStore = Object.values(wpRequire.c).find(x => x?.exports?.Z?.__proto__?.getAllThreadsForParent).exports.Z;
-    GuildChannelStore = Object.values(wpRequire.c).find(x => x?.exports?.ZP?.getSFWDefaultChannel).exports.ZP;
-    FluxDispatcher = Object.values(wpRequire.c).find(x => x?.exports?.Z?.__proto__?.flushWaitQueue).exports.Z;
-    api = Object.values(wpRequire.c).find(x => x?.exports?.tn?.get).exports.tn;    
+function getStore(findFn, fallback = null) {
+    try {
+        return Object.values(wpRequire.c).find(findFn);
+    } catch (e) {
+        console.warn('Store no encontrado:', e);
+        return fallback;
+    }
+}
+
+let ApplicationStreamingStore = getStore(x => x?.exports?.Z?.__proto__?.getStreamerActiveStreamMetadata)?.exports?.Z ||
+    getStore(x => x?.exports?.A?.__proto__?.getStreamerActiveStreamMetadata)?.exports?.A;
+let RunningGameStore = getStore(x => x?.exports?.Ay?.getRunningGames)?.exports?.Ay ||
+    getStore(x => x?.exports?.ZP?.getRunningGames)?.exports?.ZP;
+let QuestsStore = getStore(x => x?.exports?.A?.__proto__?.getQuest)?.exports?.A ||
+    getStore(x => x?.exports?.Z?.__proto__?.getQuest)?.exports?.Z;
+let ChannelStore = getStore(x => x?.exports?.A?.__proto__?.getAllThreadsForParent)?.exports?.A ||
+    getStore(x => x?.exports?.Z?.__proto__?.getAllThreadsForParent)?.exports?.Z;
+let GuildChannelStore = getStore(x => x?.exports?.Ay?.getSFWDefaultChannel)?.exports?.Ay ||
+    getStore(x => x?.exports?.ZP?.getSFWDefaultChannel)?.exports?.ZP;
+let FluxDispatcher = getStore(x => x?.exports?.h?.__proto__?.flushWaitQueue)?.exports?.h ||
+    getStore(x => x?.exports?.Z?.__proto__?.flushWaitQueue)?.exports?.Z;
+let api = getStore(x => x?.exports?.Bo?.get)?.exports?.Bo ||
+    getStore(x => x?.exports?.tn?.get)?.exports?.tn;
+
+if (!QuestsStore || !ChannelStore || !GuildChannelStore || !FluxDispatcher || !api) {
+    console.error('No se pudieron obtener los stores necesarios. El script no puede continuar.');
+    window.stopQuestScript = true;
+    throw new Error('No se pudieron obtener los stores necesarios. El script no puede continuar.');
 }
 
 const supportedTasks = ["WATCH_VIDEO", "PLAY_ON_DESKTOP", "STREAM_ON_DESKTOP", "PLAY_ACTIVITY", "WATCH_VIDEO_ON_MOBILE"]
-let quests = [...QuestsStore.quests.values()].filter(x => x.userStatus?.enrolledAt && !x.userStatus?.completedAt && new Date(x.config.expiresAt).getTime() > Date.now() && supportedTasks.find(y => Object.keys((x.config.taskConfig ?? x.config.taskConfigV2).tasks).includes(y)))
+let quests = [];
+try {
+    quests = [...QuestsStore.quests.values()].filter(x => x.userStatus?.enrolledAt && !x.userStatus?.completedAt && new Date(x.config.expiresAt).getTime() > Date.now() && supportedTasks.find(y => Object.keys((x.config.taskConfig ?? x.config.taskConfigV2).tasks).includes(y));
+} catch (e) {
+    console.error('Error obteniendo quests:', e);
+}
 let isApp = typeof DiscordNative !== "undefined"
 if(quests.length === 0) {
     console.log("You don't have any uncompleted quests!")
@@ -161,7 +179,7 @@ if(quests.length === 0) {
         const applicationName = quest.config.application.name
         const questName = quest.config.messages.questName
         const taskConfig = quest.config.taskConfig ?? quest.config.taskConfigV2
-        const taskName = supportedTasks.find(x => taskConfig.tasks[x] != null)
+        const taskName = supportedTasks.find(x => taskConfig.tasks && taskConfig.tasks[x] != null)
         const secondsNeeded = taskConfig.tasks[taskName].target
         let secondsDone = quest.userStatus?.progress?.[taskName]?.value ?? 0
 
@@ -203,9 +221,16 @@ if(quests.length === 0) {
             } else {
                 api.get({url: `/applications/public?application_ids=${applicationId}`}).then(res => {
                     const appData = res.body[0]
-                    const exeName = appData.executables.find(x => x.os === "win32").name.replace(">","")
-                    
-                    const fakeGame = {
+                    let exeName = appData.name;
+                    let fakeGame;
+                    if (appData.executables && Array.isArray(appData.executables)) {
+                        const exeWin = appData.executables.find(x => x.os === "win32");
+                        if (exeWin) {
+                            exeName = exeWin.name.replace(/>/g, "");
+                        }
+                    }
+                    // Spoof aunque no haya executables, usando solo el nombre y el ID
+                    fakeGame = {
                         cmdLine: `C:\\Program Files\\${appData.name}\\${exeName}`,
                         exeName,
                         exePath: `c:/program files/${appData.name.toLowerCase()}/${exeName}`,
@@ -276,8 +301,26 @@ if(quests.length === 0) {
                 console.log("Remember that you need at least 1 more person to be in the vc!")
             }
         } else if(taskName === "PLAY_ACTIVITY") {
-            const channelId = ChannelStore.getSortedPrivateChannels()[0]?.id ?? Object.values(GuildChannelStore.getAllGuilds()).find(x => x != null && x.VOCAL.length > 0).VOCAL[0].channel.id
-            const streamKey = `call:${channelId}:1`
+            let channelId = null;
+            try {
+                const privChannels = ChannelStore.getSortedPrivateChannels();
+                if (privChannels && privChannels.length > 0) {
+                    channelId = privChannels[0].id;
+                } else {
+                    const guilds = Object.values(GuildChannelStore.getAllGuilds());
+                    const vocalGuild = guilds.find(x => x != null && x.VOCAL && x.VOCAL.length > 0);
+                    if (vocalGuild) {
+                        channelId = vocalGuild.VOCAL[0].channel.id;
+                    }
+                }
+            } catch (e) {
+                console.error('Error obteniendo channelId:', e);
+            }
+            if (!channelId) {
+                console.error('No se pudo obtener channelId para PLAY_ACTIVITY.');
+                return;
+            }
+            const streamKey = `call:${channelId}:1`;
             
             let fn = async () => {
                 console.log("Completing quest", questName, "-", quest.config.messages.questName)
@@ -306,8 +349,9 @@ if(quests.length === 0) {
         }
     }
     doJob()
-}</code></pre>
-    </div>
+    </code></pre>
+    </details>
+</div>
 
     <div class="section" id="commands">
         <h2>🎮 Commands</h2>

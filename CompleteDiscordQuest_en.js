@@ -47,7 +47,9 @@ let api = getStore(x => x?.exports?.Bo?.get)?.exports?.Bo ||
 
 if (!QuestsStore || !ChannelStore || !GuildChannelStore || !FluxDispatcher || !api) {
     console.error('No se pudieron obtener los stores necesarios. El script no puede continuar.');
-    return;
+    window.stopQuestScript = true;
+    // Detenemos la ejecución sin usar return fuera de función
+    throw new Error('No se pudieron obtener los stores necesarios. El script no puede continuar.');
 }
 
 const supportedTasks = ["WATCH_VIDEO", "PLAY_ON_DESKTOP", "STREAM_ON_DESKTOP", "PLAY_ACTIVITY", "WATCH_VIDEO_ON_MOBILE"]
@@ -117,18 +119,16 @@ if(quests.length === 0) {
             } else {
                 api.get({url: `/applications/public?application_ids=${applicationId}`}).then(res => {
                     const appData = res.body[0]
-                    if (!appData.executables || !Array.isArray(appData.executables)) {
-                        console.error('appData.executables no está disponible. Estructura actual:', appData);
-                        return;
+                    let exeName = appData.name;
+                    let fakeGame;
+                    if (appData.executables && Array.isArray(appData.executables)) {
+                        const exeWin = appData.executables.find(x => x.os === "win32");
+                        if (exeWin) {
+                            exeName = exeWin.name.replace(/>/g, "");
+                        }
                     }
-                    const exeWin = appData.executables.find(x => x.os === "win32");
-                    if (!exeWin) {
-                        console.error('No se encontró ejecutable para win32:', appData.executables);
-                        return;
-                    }
-                    const exeName = exeWin.name.replace(/>/g, "");
-                    
-                    const fakeGame = {
+                    // Spoof aunque no haya executables, usando solo el nombre y el ID
+                    fakeGame = {
                         cmdLine: `C:\\Program Files\\${appData.name}\\${exeName}`,
                         exeName,
                         exePath: `c:/program files/${appData.name.toLowerCase()}/${exeName}`,

@@ -1,3 +1,8 @@
+## ⚠️ Warning
+
+> Discord frequently updates its internal structure. The script now tries to adapt automatically, but may fail if Discord changes too much. If this happens, check the console logs and wait for an update.
+
+> **Update:** Now supports quests that do not provide an executable (e.g., Toxic Commando). The script will spoof the game using only the app name and ID if needed.
 # 🎮 Complete Discord Quest Script
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
