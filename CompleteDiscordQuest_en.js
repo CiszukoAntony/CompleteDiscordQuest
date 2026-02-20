@@ -117,7 +117,6 @@ if(quests.length === 0) {
             } else {
                 api.get({url: `/applications/public?application_ids=${applicationId}`}).then(res => {
                     const appData = res.body[0]
-<<<<<<< HEAD
                     if (!appData.executables || !Array.isArray(appData.executables)) {
                         console.error('appData.executables no está disponible. Estructura actual:', appData);
                         return;
@@ -127,10 +126,7 @@ if(quests.length === 0) {
                         console.error('No se encontró ejecutable para win32:', appData.executables);
                         return;
                     }
-                    const exeName = exeWin.name.replace(">","");
-=======
-                    const exeName = appData.executables.find(x => x.os === "win32").name.replace(/>/g, "")
->>>>>>> 97defc3d8ec520dac11222c08cd1f21227435db1
+                    const exeName = exeWin.name.replace(/>/g, "");
                     
                     const fakeGame = {
                         cmdLine: `C:\\Program Files\\${appData.name}\\${exeName}`,
@@ -223,7 +219,6 @@ if(quests.length === 0) {
                 return;
             }
             const streamKey = `call:${channelId}:1`;
-            const streamKey = `call:${channelId}:1`
             
             let fn = async () => {
                 console.log("Completing quest", questName, "-", quest.config.messages.questName)

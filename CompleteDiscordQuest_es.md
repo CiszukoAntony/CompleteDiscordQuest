@@ -156,6 +156,10 @@ SOFTWARE.
 
 ___
 
+# ⚠️ Actualización
+
+> Se corrigieron conflictos de merge y errores de redeclaración. Ambos scripts están sincronizados y robustos ante cambios internos de Discord.
+
 # ⚠️ Advertencia
 
 > Discord actualiza frecuentemente su estructura interna. El script ahora intenta adaptarse automáticamente, pero puede fallar si Discord cambia demasiado. Si ocurre, revisa los logs de consola y espera una actualización.
