@@ -1,0 +1,45 @@
+name: Sync Repo to Gists
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - 'CompleteDiscordQuest_en.js'
+      - 'CompleteDiscordQuest_en.md'
+      - 'CompleteDiscordQuest_es.js'
+      - 'CompleteDiscordQuest_es.md'
+
+jobs:
+  update-gists:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Update English Gist
+        uses: exuanbo/actions-deploy-gist@v1
+        with:
+          token: ${{ secrets.GIST_TOKEN }}
+          gist_id: 32158ca5183514128e75ff5431e7b81e
+          file_path: CompleteDiscordQuest_en.js
+      
+      - name: Update English MD
+        uses: exuanbo/actions-deploy-gist@v1
+        with:
+          token: ${{ secrets.GIST_TOKEN }}
+          gist_id: 32158ca5183514128e75ff5431e7b81e
+          file_path: CompleteDiscordQuest_en.md
+
+      - name: Update Spanish Gist
+        uses: exuanbo/actions-deploy-gist@v1
+        with:
+          token: ${{ secrets.GIST_TOKEN }}
+          gist_id: 0f0932214e8975dfc874a528a73eebd5
+          file_path: CompleteDiscordQuest_es.js
+      
+      - name: Update Spanish MD
+        uses: exuanbo/actions-deploy-gist@v1
+        with:
+          token: ${{ secrets.GIST_TOKEN }}
+          gist_id: 0f0932214e8975dfc874a528a73eebd5
+          file_path: CompleteDiscordQuest_es.md
